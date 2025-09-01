@@ -5,52 +5,241 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import AuthorInfo from '../components/AuthorInfo.astro';
+import BlogSidebar from '../components/BlogSidebar.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+	slug?: string;
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, slug, category, tags } = Astro.props;
+
+// Create breadcrumb items
+const breadcrumbItems = [
+	{ label: 'Home', href: '/' },
+	{ label: 'Blog', href: '/blog' },
+	{ label: category || 'General', href: `/blog/category/${(category || 'General').toLowerCase().replace(/\s+/g, '-')}` },
+	{ label: title }
+];
+
+// Author information
+const authorInfo = {
+	name: 'Yayan Deka',
+	bio: 'Full-stack developer and creative professional passionate about technology, design, and writing.',
+	url: '/',
+	avatar: '/favicon.svg' // You can replace this with an actual avatar image
+};
+
+// Estimate reading time (rough calculation: 200 words per minute)
+function estimateReadingTime(content: string): number {
+	const wordsPerMinute = 200;
+	const words = content.trim().split(/\s+/).length;
+	return Math.ceil(words / wordsPerMinute);
+}
+
+// Get the content for reading time calculation
+const currentPath = Astro.url.pathname;
+const readingTime = 5; // Default fallback, you can implement dynamic calculation
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead 
+			title={title} 
+			description={description} 
+			image={heroImage}
+			publishDate={pubDate}
+			updateDate={updatedDate}
+			author={authorInfo.name}
+			type="article"
+		/>
 		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
+			.blog-layout {
+				display: grid;
+				grid-template-columns: 1fr 300px;
+				gap: 3rem;
+				align-items: start;
 			}
+			
+			.article-content {
+				min-width: 0; /* Prevent overflow */
+			}
+			
 			.hero-image {
 				width: 100%;
+				margin-bottom: 2rem;
 			}
+			
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
 				border-radius: 12px;
 				box-shadow: var(--box-shadow);
+				width: 100%;
+				height: auto;
 			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
+			
+			.article-header {
+				margin-bottom: 2rem;
 				text-align: center;
-				line-height: 1;
 			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
+			
+			.article-meta {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 1rem;
+				font-size: 0.9rem;
 				color: rgb(var(--gray));
 			}
-			.last-updated-on {
-				font-style: italic;
+			
+			.meta-item {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			
+			.meta-icon {
+				width: 16px;
+				height: 16px;
+				fill: currentColor;
+			}
+			
+			.article-title {
+				font-size: 2.5rem;
+				line-height: 1.2;
+				margin: 1rem 0;
+				color: rgb(var(--gray-dark));
+			}
+			
+			.article-description {
+				font-size: 1.2rem;
+				color: rgb(var(--gray));
+				line-height: 1.6;
+				margin-bottom: 2rem;
+			}
+			
+			.content {
+				color: rgb(var(--gray-dark));
+				line-height: 1.7;
+			}
+			
+			.article-footer {
+				margin-top: 3rem;
+				padding-top: 2rem;
+				border-top: 1px solid rgb(var(--gray-light));
+			}
+			
+			.tags {
+				margin-bottom: 2rem;
+			}
+			
+			.tags-title {
+				font-weight: 600;
+				margin-bottom: 0.75rem;
+				color: rgb(var(--gray-dark));
+			}
+			
+			.tag-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+			}
+			
+			.tag {
+				background: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+				padding: 0.3rem 0.8rem;
+				border-radius: 15px;
+				font-size: 0.8rem;
+				font-weight: 500;
+				border: 1px solid rgb(var(--gray-light));
+			}
+			
+			.tags-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+			}
+			
+			.tag {
+				background: var(--gray-light);
+				color: rgb(var(--gray-dark));
+				padding: 0.25rem 0.75rem;
+				border-radius: 15px;
+				font-size: 0.85rem;
+				text-decoration: none;
+				transition: all 0.3s ease;
+			}
+			
+			.tag:hover {
+				background: var(--accent);
+				color: white;
+			}
+			
+			.social-share {
+				margin-bottom: 2rem;
+			}
+			
+			.share-title {
+				font-weight: 600;
+				margin-bottom: 0.75rem;
+				color: rgb(var(--gray-dark));
+			}
+			
+			.share-buttons {
+				display: flex;
+				gap: 0.75rem;
+				flex-wrap: wrap;
+			}
+			
+			.share-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.5rem 1rem;
+				background: var(--accent);
+				color: white;
+				text-decoration: none;
+				border-radius: 6px;
+				font-size: 0.9rem;
+				transition: all 0.3s ease;
+			}
+			
+			.share-button:hover {
+				background: var(--accent-dark);
+				transform: translateY(-2px);
+			}
+			
+			.share-icon {
+				width: 16px;
+				height: 16px;
+				fill: currentColor;
+			}
+			
+			@media (max-width: 1200px) {
+				.blog-layout {
+					grid-template-columns: 1fr;
+					gap: 2rem;
+				}
+			}
+			
+			@media (max-width: 768px) {
+				.article-title {
+					font-size: 2rem;
+				}
+				
+				.article-meta {
+					flex-direction: column;
+					gap: 0.5rem;
+				}
+				
+				.share-buttons {
+					justify-content: center;
+				}
 			}
 		</style>
 	</head>
@@ -58,28 +247,142 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	<body>
 		<Header />
 		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+			<Breadcrumb items={breadcrumbItems} />
+			
+			<div class="blog-layout">
+				<article itemscope itemtype="https://schema.org/BlogPosting" class="article-content">
+					{heroImage && (
+						<div class="hero-image">
+							<Image 
+								width={1020} 
+								height={510} 
+								src={heroImage} 
+								alt={title}
+								itemprop="image"
+							/>
 						</div>
-						<h1>{title}</h1>
-						<hr />
+					)}
+					
+					<header class="article-header">
+						<div class="article-meta">
+							{category && (
+								<div class="meta-item">
+									<svg class="meta-icon" viewBox="0 0 24 24">
+										<path d="M5.5,7A1.5,1.5 0 0,1 4,5.5A1.5,1.5 0 0,1 5.5,4A1.5,1.5 0 0,1 7,5.5A1.5,1.5 0 0,1 5.5,7M21.41,11.58L12.41,2.58C12.05,2.22 11.55,2 11,2H4C2.89,2 2,2.89 2,4V11C2,11.55 2.22,12.05 2.59,12.41L11.58,21.41C11.95,21.78 12.45,22 13,22C13.55,22 14.05,21.78 14.41,21.41L21.41,14.41C21.78,14.05 22,13.55 22,13C22,12.45 21.78,11.95 21.41,11.58Z"/>
+									</svg>
+									<a href={`/blog/category/${category.toLowerCase().replace(/\s+/g, '-')}`} style="color: var(--accent); text-decoration: none;">
+										{category}
+									</a>
+								</div>
+							)}
+							
+							<div class="meta-item">
+								<svg class="meta-icon" viewBox="0 0 24 24">
+									<path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,4.11 20.1,3 19,3M19,5V7H5V5H19M5,19V9H19V19H5Z"/>
+								</svg>
+								<time datetime={pubDate.toISOString()} itemprop="datePublished">
+									<FormattedDate date={pubDate} />
+								</time>
+							</div>
+							
+							{updatedDate && (
+								<div class="meta-item">
+									<svg class="meta-icon" viewBox="0 0 24 24">
+										<path d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
+									</svg>
+									<time datetime={updatedDate.toISOString()} itemprop="dateModified">
+										Updated: <FormattedDate date={updatedDate} />
+									</time>
+								</div>
+							)}
+							
+							<div class="meta-item">
+								<svg class="meta-icon" viewBox="0 0 24 24">
+									<path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/>
+								</svg>
+								<span itemprop="author" itemscope itemtype="https://schema.org/Person">
+									<span itemprop="name">{authorInfo.name}</span>
+								</span>
+							</div>
+							
+							<div class="meta-item">
+								<svg class="meta-icon" viewBox="0 0 24 24">
+									<path d="M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/>
+								</svg>
+								<span>{readingTime} min read</span>
+							</div>
+						</div>
+						
+						<h1 class="article-title" itemprop="headline">{title}</h1>
+						<p class="article-description" itemprop="description">{description}</p>
+					</header>
+					
+					<div class="content" itemprop="articleBody">
+						<slot />
 					</div>
-					<slot />
-				</div>
-			</article>
+					
+					<footer class="article-footer">
+						{tags && tags.length > 0 && (
+							<div class="tags">
+								<h3 class="tags-title">Tags</h3>
+								<div class="tag-list">
+									{tags.map(tag => (
+										<span class="tag">{tag}</span>
+									))}
+								</div>
+							</div>
+						)}
+						
+						<div class="social-share">
+							<h3 class="share-title">Share this article</h3>
+							<div class="share-buttons">
+								<a 
+									href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.toString())}`}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="share-button"
+								>
+									<svg class="share-icon" viewBox="0 0 24 24">
+										<path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+									</svg>
+									<span>Twitter</span>
+								</a>
+								
+								<a 
+									href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.toString())}`}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="share-button"
+								>
+									<svg class="share-icon" viewBox="0 0 24 24">
+										<path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/>
+									</svg>
+									<span>LinkedIn</span>
+								</a>
+								
+								<a 
+									href={`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this article: ${Astro.url.toString()}`)}`}
+									class="share-button"
+								>
+									<svg class="share-icon" viewBox="0 0 24 24">
+										<path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+									</svg>
+									<span>Email</span>
+								</a>
+							</div>
+						</div>
+						
+						<AuthorInfo 
+							name={authorInfo.name}
+							bio={authorInfo.bio}
+							url={authorInfo.url}
+							avatar={authorInfo.avatar}
+						/>
+					</footer>
+				</article>
+				
+				<BlogSidebar currentSlug={slug} />
+			</div>
 		</main>
 		<Footer />
 	</body>

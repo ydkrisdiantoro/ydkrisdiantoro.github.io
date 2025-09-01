@@ -1,0 +1,106 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+export interface Props {
+	title: string;
+	description: string;
+	breadcrumbItems?: Array<{
+		label: string;
+		href?: string;
+	}>;
+	categories?: string[];
+	currentCategory?: string;
+}
+
+const { title, description, breadcrumbItems, categories = [], currentCategory } = Astro.props;
+
+// Default breadcrumbs for blog pages
+const defaultBreadcrumbs = [
+	{ label: 'Home', href: '/' },
+	{ label: 'Blog', href: '/blog' }
+];
+
+const finalBreadcrumbs = breadcrumbItems || defaultBreadcrumbs;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead 
+			title={title} 
+			description={description}
+		/>
+		<style>
+			.blog-container {
+				display: grid;
+				grid-template-columns: 1fr 300px;
+				gap: 3rem;
+				align-items: start;
+			}
+			
+			.blog-content {
+				min-width: 0; /* Prevent overflow */
+			}
+			
+			.page-header {
+				margin-bottom: 3rem;
+				text-align: center;
+			}
+			
+			.page-title {
+				font-size: 2.5rem;
+				line-height: 1.2;
+				margin: 1rem 0;
+				color: rgb(var(--gray-dark));
+			}
+			
+			.page-description {
+				font-size: 1.2rem;
+				color: rgb(var(--gray));
+				line-height: 1.6;
+				margin: 0;
+			}
+			
+			@media (max-width: 1200px) {
+				.blog-container {
+					grid-template-columns: 1fr;
+					gap: 2rem;
+				}
+			}
+			
+			@media (max-width: 768px) {
+				.page-title {
+					font-size: 2rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<Breadcrumb items={finalBreadcrumbs} />
+			
+			<div class="blog-container">
+				<article class="blog-content">
+					<header class="page-header">
+						<h1 class="page-title">{title}</h1>
+						<p class="page-description">{description}</p>
+					</header>
+					
+					<div class="content">
+						<slot />
+					</div>
+				</article>
+				
+				{categories.length > 0 && (
+					<Sidebar categories={categories} currentCategory={currentCategory} />
+				)}
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

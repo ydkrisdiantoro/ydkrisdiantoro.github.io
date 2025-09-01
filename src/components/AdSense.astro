@@ -1,0 +1,114 @@
+---
+import { ADSENSE_CONFIG } from '../consts';
+
+interface Props {
+	slot: string;
+	format?: 'auto' | 'rectangle' | 'vertical' | 'horizontal';
+	style?: string;
+	className?: string;
+}
+
+const { slot, format = 'auto', style, className = '' } = Astro.props;
+
+// Only render if AdSense is enabled and publisher ID is configured
+if (!ADSENSE_CONFIG.enableAds || !ADSENSE_CONFIG.publisherId) {
+	// Return null/nothing if ads are disabled
+} else {
+	// This is where actual AdSense code would go when publisher ID is configured
+}
+---
+
+{ADSENSE_CONFIG.enableAds && ADSENSE_CONFIG.publisherId ? (
+	<!-- Actual Google AdSense code would go here -->
+	<div class={`adsense-container ${className}`} style={style}>
+		<ins 
+			class="adsbygoogle"
+			style="display:block"
+			data-ad-client={ADSENSE_CONFIG.publisherId}
+			data-ad-slot={slot}
+			data-ad-format={format}
+			data-full-width-responsive="true"
+		></ins>
+		<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</div>
+) : (
+	<!-- Development placeholder when no publisher ID is set -->
+	<div class={`ad-placeholder ${className}`} style={style}>
+		<div class="ad-placeholder-content">
+			<div class="ad-label">Advertisement Space</div>
+			<div class="ad-info">
+				{format === 'rectangle' ? '300x250' : 
+				 format === 'vertical' ? '160x600' : 
+				 format === 'horizontal' ? '728x90' : 
+				 'Responsive'}
+			</div>
+			<div class="ad-note">Configure ADSENSE_PUBLISHER_ID in consts.ts to enable ads</div>
+		</div>
+	</div>
+)}
+
+<style>
+	.adsense-container {
+		margin: 1rem 0;
+		text-align: center;
+	}
+
+	.ad-placeholder {
+		background: #f8f9fa;
+		border: 1px dashed #dee2e6;
+		border-radius: 8px;
+		margin: 1rem 0;
+		min-height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.ad-placeholder-content {
+		text-align: center;
+		color: #6c757d;
+		font-size: 0.9rem;
+	}
+
+	.ad-label {
+		font-weight: 500;
+		margin-bottom: 0.25rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		font-size: 0.8rem;
+	}
+
+	.ad-info {
+		font-size: 1rem;
+		color: #495057;
+		margin-bottom: 0.25rem;
+	}
+
+	.ad-note {
+		font-size: 0.7rem;
+		color: #adb5bd;
+		font-style: italic;
+	}
+
+	/* Responsive ad sizes */
+	.ad-placeholder[data-format="rectangle"] {
+		width: 300px;
+		height: 250px;
+		margin: 1rem auto;
+	}
+
+	.ad-placeholder[data-format="vertical"] {
+		width: 160px;
+		height: 600px;
+		margin: 1rem auto;
+	}
+
+	.ad-placeholder[data-format="horizontal"] {
+		width: 728px;
+		height: 90px;
+		max-width: 100%;
+		margin: 1rem auto;
+	}
+</style>

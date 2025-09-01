@@ -1,0 +1,188 @@
+---
+export interface Props {
+	page: {
+		currentPage: number;
+		lastPage: number;
+		url: {
+			prev?: string;
+			next?: string;
+		};
+	};
+	baseUrl?: string;
+	class?: string;
+}
+
+const { page, baseUrl = '/blog', class: className = '' } = Astro.props;
+
+// Helper function to generate page URLs
+function getPageUrl(pageNum: number): string {
+	return pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`;
+}
+
+// Calculate which page numbers to show
+function getVisiblePages() {
+	const { currentPage, lastPage } = page;
+	const pages: (number | 'ellipsis')[] = [];
+	
+	// Always show first page
+	pages.push(1);
+	
+	// Calculate range around current page
+	const start = Math.max(2, currentPage - 1);
+	const end = Math.min(lastPage - 1, currentPage + 1);
+	
+	// Add ellipsis after first page if needed
+	if (start > 2) {
+		pages.push('ellipsis');
+	}
+	
+	// Add pages around current page
+	for (let i = start; i <= end; i++) {
+		if (i !== 1 && i !== lastPage) {
+			pages.push(i);
+		}
+	}
+	
+	// Add ellipsis before last page if needed
+	if (end < lastPage - 1) {
+		pages.push('ellipsis');
+	}
+	
+	// Always show last page (if different from first)
+	if (lastPage > 1) {
+		pages.push(lastPage);
+	}
+	
+	return pages;
+}
+
+const visiblePages = getVisiblePages();
+---
+
+<nav class={`pagination ${className}`} aria-label="Pagination navigation">
+	<!-- Previous Button -->
+	{page.url.prev ? (
+		<a href={page.url.prev} class="prev-next" aria-label="Previous page">
+			← Previous
+		</a>
+	) : (
+		<span class="prev-next disabled" aria-label="No previous page">
+			← Previous
+		</span>
+	)}
+	
+	<!-- Page Numbers -->
+	{visiblePages.map((pageItem, index) => {
+		if (pageItem === 'ellipsis') {
+			return <span key={`ellipsis-${index}`} class="ellipsis">…</span>;
+		}
+		
+		const pageNum = pageItem as number;
+		const isCurrentPage = pageNum === page.currentPage;
+		const url = getPageUrl(pageNum);
+		
+		return isCurrentPage ? (
+			<span key={pageNum} class="current" aria-current="page" aria-label={`Current page ${pageNum}`}>
+				{pageNum}
+			</span>
+		) : (
+			<a key={pageNum} href={url} aria-label={`Go to page ${pageNum}`}>
+				{pageNum}
+			</a>
+		);
+	})}
+	
+	<!-- Next Button -->
+	{page.url.next ? (
+		<a href={page.url.next} class="prev-next" aria-label="Next page">
+			Next →
+		</a>
+	) : (
+		<span class="prev-next disabled" aria-label="No next page">
+			Next →
+		</span>
+	)}
+</nav>
+
+<style>
+	.pagination {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 3rem 0 2rem 0;
+		padding: 1rem 0;
+	}
+	
+	.pagination a,
+	.pagination span {
+		padding: 0.75rem 1rem;
+		border: 2px solid var(--accent);
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		min-width: 40px;
+		text-align: center;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.pagination a {
+		background: white;
+		color: var(--accent);
+	}
+	
+	.pagination a:hover {
+		background: var(--accent);
+		color: white;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+	}
+	
+	.pagination .current {
+		background: var(--accent);
+		color: white;
+		font-weight: 600;
+	}
+	
+	.pagination .disabled {
+		opacity: 0.5;
+		pointer-events: none;
+		background: rgb(var(--gray-light));
+		border-color: rgb(var(--gray-light));
+		color: rgb(var(--gray));
+	}
+	
+	.pagination .prev-next {
+		padding: 0.75rem 1.5rem;
+		font-weight: 600;
+	}
+	
+	.pagination .ellipsis {
+		border: none;
+		background: none;
+		color: rgb(var(--gray));
+		font-weight: bold;
+		padding: 0.75rem 0.5rem;
+	}
+	
+	@media (max-width: 720px) {
+		.pagination {
+			flex-wrap: wrap;
+			gap: 0.25rem;
+		}
+		
+		.pagination a,
+		.pagination span {
+			padding: 0.5rem 0.75rem;
+			font-size: 0.9rem;
+			min-width: 35px;
+		}
+		
+		.pagination .prev-next {
+			padding: 0.5rem 1rem;
+		}
+	}
+</style>

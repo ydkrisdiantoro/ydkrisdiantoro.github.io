@@ -1,0 +1,523 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Projects - ${SITE_TITLE}`} description="Portfolio of selected projects and work" />
+		<style>
+			.projects-hero {
+				text-align: center;
+				margin-bottom: 3rem;
+			}
+			
+			.projects-hero h1 {
+				font-size: 2.5rem;
+				margin-bottom: 1rem;
+				color: rgb(var(--gray-dark));
+			}
+			
+			.projects-hero p {
+				font-size: 1.2rem;
+				color: rgb(var(--gray));
+				max-width: 600px;
+				margin: 0 auto;
+			}
+			
+			.section {
+				margin-bottom: 3rem;
+			}
+			
+			.section h2 {
+				font-size: 1.8rem;
+				margin-bottom: 1.5rem;
+				color: rgb(var(--gray-dark));
+				font-weight: 600;
+				border-bottom: 2px solid var(--accent);
+				padding-bottom: 0.5rem;
+				display: inline-block;
+			}
+			
+			.projects-list {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+			
+			.project-item {
+				background: white;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				padding: 1.5rem;
+				transition: all 0.2s ease;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.project-item:hover {
+				border-color: var(--accent);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+				transform: translateY(-1px);
+			}
+			
+			.project-item::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				width: 4px;
+				background: var(--accent);
+				transform: scaleY(0);
+				transition: transform 0.2s ease;
+			}
+			
+			.project-item:hover::before {
+				transform: scaleY(1);
+			}
+			
+			.project-header {
+				display: flex;
+				align-items: flex-start;
+				gap: 1rem;
+				margin-bottom: 0.75rem;
+			}
+			
+			.project-icon {
+				width: 48px;
+				height: 48px;
+				background: linear-gradient(135deg, var(--accent), #60a5fa);
+				border-radius: 10px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				font-weight: 600;
+				font-size: 1.2rem;
+				flex-shrink: 0;
+			}
+			
+			.project-content {
+				flex: 1;
+				min-width: 0;
+			}
+			
+			.project-title {
+				font-size: 1.25rem;
+				font-weight: 600;
+				color: rgb(var(--gray-dark));
+				margin: 0 0 0.25rem 0;
+				line-height: 1.3;
+			}
+			
+			.project-subtitle {
+				font-size: 0.9rem;
+				color: rgb(var(--gray));
+				margin: 0 0 0.75rem 0;
+				font-weight: 500;
+			}
+			
+			.project-description {
+				color: rgb(var(--gray));
+				line-height: 1.5;
+				margin-bottom: 1rem;
+			}
+			
+			.project-meta {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 1rem;
+			}
+			
+			.project-tech {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4rem;
+			}
+			
+			.tech-tag {
+				background: rgba(135, 206, 235, 0.1);
+				color: var(--accent);
+				padding: 0.2rem 0.6rem;
+				border-radius: 6px;
+				font-size: 0.75rem;
+				font-weight: 500;
+				border: 1px solid rgba(135, 206, 235, 0.2);
+			}
+			
+			.project-status {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+			}
+			
+			.status-dot {
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: #10b981;
+			}
+			
+			.project-actions {
+				display: flex;
+				gap: 0.75rem;
+				flex-wrap: wrap;
+			}
+			
+			.project-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4rem;
+				padding: 0.5rem 1rem;
+				text-decoration: none;
+				border-radius: 6px;
+				font-size: 0.85rem;
+				font-weight: 500;
+				transition: all 0.2s ease;
+				border: 1px solid transparent;
+			}
+			
+			.project-link.primary {
+				background: var(--accent);
+				color: white;
+			}
+			
+			.project-link.primary:hover {
+				background: var(--accent-dark);
+				transform: translateY(-1px);
+			}
+			
+			.project-link.secondary {
+				background: transparent;
+				color: rgb(var(--gray));
+				border-color: rgb(var(--gray-light));
+			}
+			
+			.project-link.secondary:hover {
+				background: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+			}
+			
+			.link-icon {
+				width: 14px;
+				height: 14px;
+				fill: currentColor;
+			}
+			
+			.creative-list {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+			
+			.creative-item {
+				background: white;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				padding: 1.25rem;
+				transition: all 0.2s ease;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.creative-item:hover {
+				border-color: var(--accent);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+				transform: translateY(-1px);
+			}
+			
+			.creative-item::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				width: 4px;
+				background: linear-gradient(135deg, #f59e0b, #ef4444);
+				transform: scaleY(0);
+				transition: transform 0.2s ease;
+			}
+			
+			.creative-item:hover::before {
+				transform: scaleY(1);
+			}
+			
+			.creative-header {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 0.75rem;
+			}
+			
+			.creative-icon {
+				width: 40px;
+				height: 40px;
+				background: linear-gradient(135deg, #f59e0b, #ef4444);
+				border-radius: 8px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				flex-shrink: 0;
+			}
+			
+			.creative-icon svg {
+				width: 20px;
+				height: 20px;
+				fill: currentColor;
+			}
+			
+			.creative-title {
+				font-size: 1.1rem;
+				font-weight: 600;
+				color: rgb(var(--gray-dark));
+				margin: 0;
+			}
+			
+			.creative-description {
+				color: rgb(var(--gray));
+				line-height: 1.5;
+				margin-bottom: 1rem;
+			}
+			
+			.creative-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4rem;
+				padding: 0.4rem 0.8rem;
+				background: linear-gradient(135deg, #f59e0b, #ef4444);
+				color: white;
+				text-decoration: none;
+				border-radius: 6px;
+				font-size: 0.85rem;
+				font-weight: 500;
+				transition: all 0.2s ease;
+			}
+			
+			.creative-link:hover {
+				transform: translateY(-1px);
+				box-shadow: 0 4px 8px rgba(245, 158, 11, 0.3);
+			}
+			
+			@media (max-width: 768px) {
+				.project-header {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 0.75rem;
+				}
+				
+				.project-icon {
+					align-self: flex-start;
+				}
+				
+				.project-meta {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 0.75rem;
+				}
+				
+				.project-actions {
+					width: 100%;
+				}
+				
+				.project-link {
+					flex: 1;
+					justify-content: center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="projects-hero">
+				<h1>Projects & Work</h1>
+				<p>A collection of selected projects showcasing development skills, creative design work, and technical solutions.</p>
+			</div>
+
+			<section class="section">
+				<h2>Development Projects</h2>
+				<div class="projects-list">
+					<div class="project-item">
+						<div class="project-header">
+							<div class="project-icon">
+								🌐
+							</div>
+							<div class="project-content">
+								<h3 class="project-title">Personal Portfolio & Blog</h3>
+								<p class="project-subtitle">Modern web application built with Astro</p>
+							</div>
+						</div>
+						<p class="project-description">
+							Modern portfolio and blog built with Astro, featuring responsive design, optimized performance, and clean architecture for content management.
+						</p>
+						<div class="project-meta">
+							<div class="project-tech">
+								<span class="tech-tag">Astro</span>
+								<span class="tech-tag">TypeScript</span>
+								<span class="tech-tag">CSS</span>
+								<span class="tech-tag">Markdown</span>
+							</div>
+							<div class="project-status">
+								<span class="status-dot"></span>
+								<span>Live</span>
+							</div>
+						</div>
+						<div class="project-actions">
+							<a href="/" class="project-link primary">
+								<svg class="link-icon" viewBox="0 0 24 24">
+									<path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+								</svg>
+								View Live
+							</a>
+							<a href="https://github.com/ydkrisdiantoro" target="_blank" class="project-link secondary">
+								<svg class="link-icon" viewBox="0 0 24 24">
+									<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+								</svg>
+								Source Code
+							</a>
+						</div>
+					</div>
+
+					<div class="project-item">
+						<div class="project-header">
+							<div class="project-icon">
+								⚛️
+							</div>
+							<div class="project-content">
+								<h3 class="project-title">Full-Stack Web Applications</h3>
+								<p class="project-subtitle">Custom web applications with modern frameworks</p>
+							</div>
+						</div>
+						<p class="project-description">
+							Custom web applications built with modern frameworks, focusing on user experience, scalability, and maintainable code architecture.
+						</p>
+						<div class="project-meta">
+							<div class="project-tech">
+								<span class="tech-tag">React</span>
+								<span class="tech-tag">Node.js</span>
+								<span class="tech-tag">Database</span>
+								<span class="tech-tag">API</span>
+							</div>
+							<div class="project-status">
+								<span class="status-dot"></span>
+								<span>Active</span>
+							</div>
+						</div>
+						<div class="project-actions">
+							<a href="https://github.com/ydkrisdiantoro" target="_blank" class="project-link primary">
+								<svg class="link-icon" viewBox="0 0 24 24">
+									<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+								</svg>
+								View Projects
+							</a>
+						</div>
+					</div>
+
+					<div class="project-item">
+						<div class="project-header">
+							<div class="project-icon">
+								🛠️
+							</div>
+							<div class="project-content">
+								<h3 class="project-title">Software Solutions</h3>
+								<p class="project-subtitle">Custom tools and automation scripts</p>
+							</div>
+						</div>
+						<p class="project-description">
+							Custom software tools and utilities designed to solve specific problems, automate workflows, and improve productivity.
+						</p>
+						<div class="project-meta">
+							<div class="project-tech">
+								<span class="tech-tag">Python</span>
+								<span class="tech-tag">JavaScript</span>
+								<span class="tech-tag">Automation</span>
+								<span class="tech-tag">CLI Tools</span>
+							</div>
+							<div class="project-status">
+								<span class="status-dot"></span>
+								<span>Ongoing</span>
+							</div>
+						</div>
+						<div class="project-actions">
+							<a href="https://github.com/ydkrisdiantoro" target="_blank" class="project-link primary">
+								<svg class="link-icon" viewBox="0 0 24 24">
+									<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+								</svg>
+								Explore Tools
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<h2>Creative Work</h2>
+				<div class="creative-list">
+					<div class="creative-item">
+						<div class="creative-header">
+							<div class="creative-icon">
+								<svg viewBox="0 0 24 24">
+									<path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z"/>
+								</svg>
+							</div>
+							<h3 class="creative-title">Vector Illustrations</h3>
+						</div>
+						<p class="creative-description">Professional vector designs and illustrations available on microstock platforms, ranging from business graphics to artistic compositions.</p>
+						<a href="https://www.freepik.com/search?author=10124037&format=author&last_filter=author&last_value=10124037&sort=recent" target="_blank" class="creative-link">
+							<svg class="link-icon" viewBox="0 0 24 24">
+								<path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+							</svg>
+							View Portfolio
+						</a>
+					</div>
+
+					<div class="creative-item">
+						<div class="creative-header">
+							<div class="creative-icon">
+								<svg viewBox="0 0 24 24">
+									<path d="M6.5,4C7.29,4 8.04,4.2 8.75,4.61C9.45,5 10,5.61 10.38,6.38C10.75,7.15 10.94,7.96 10.94,8.81C10.94,9.78 10.71,10.65 10.25,11.42C9.8,12.19 9.15,12.78 8.31,13.19C9.36,13.53 10.18,14.16 10.75,15.06C11.32,15.97 11.61,17 11.61,18.16C11.61,19.14 11.4,20.04 11,20.86C10.55,21.68 9.95,22.32 9.19,22.78C8.43,23.24 7.58,23.47 6.63,23.47H0V4H6.5M6.19,12.15C6.96,12.15 7.59,11.93 8.09,11.5C8.58,11.06 8.83,10.44 8.83,9.63C8.83,8.83 8.58,8.2 8.09,7.77C7.59,7.33 6.96,7.12 6.19,7.12H2.13V12.15H6.19M6.5,20.34C7.34,20.34 8.03,20.09 8.56,19.59C9.09,19.09 9.36,18.4 9.36,17.53C9.36,16.67 9.09,15.97 8.56,15.47C8.03,14.97 7.34,14.72 6.5,14.72H2.13V20.34H6.5Z"/>
+								</svg>
+							</div>
+							<h3 class="creative-title">Design Showcase</h3>
+						</div>
+						<p class="creative-description">Creative design projects and visual experiments showcasing artistic vision and technical design skills across various mediums.</p>
+						<a href="https://www.behance.net/yayandeka/stock" target="_blank" class="creative-link">
+							<svg class="link-icon" viewBox="0 0 24 24">
+								<path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+							</svg>
+							View Behance
+						</a>
+					</div>
+
+					<div class="creative-item">
+						<div class="creative-header">
+							<div class="creative-icon">
+								<svg viewBox="0 0 24 24">
+									<path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+								</svg>
+							</div>
+							<h3 class="creative-title">Writing Portfolio</h3>
+						</div>
+						<p class="creative-description">Creative writing projects, personal narratives, and content that explores various topics from technology to storytelling.</p>
+						<a href="https://pengalamanulis.blogspot.com" target="_blank" class="creative-link">
+							<svg class="link-icon" viewBox="0 0 24 24">
+								<path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+							</svg>
+							Read Writing
+						</a>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

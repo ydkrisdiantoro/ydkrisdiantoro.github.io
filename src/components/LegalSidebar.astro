@@ -1,0 +1,174 @@
+---
+import { getCollection } from 'astro:content';
+
+// Get recent blog posts
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
+
+// Legal pages navigation
+const legalPages = [
+  { title: 'Privacy Policy', href: '/privacy-policy' },
+  { title: 'Terms of Service', href: '/terms-of-service' },
+  { title: 'Disclaimer', href: '/disclaimer' }
+];
+
+// Get current page from URL
+const currentPath = Astro.url.pathname;
+---
+
+<aside class="legal-sidebar">
+  <div class="sidebar-section">
+    <h3>Legal Pages</h3>
+    <nav class="legal-nav">
+      {legalPages.map(page => (
+        <a 
+          href={page.href} 
+          class={currentPath === page.href ? 'legal-nav-link active' : 'legal-nav-link'}
+        >
+          {page.title}
+        </a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="sidebar-section">
+    <h3>Recent Posts</h3>
+    <div class="recent-posts">
+      {recentPosts.map(post => (
+        <article class="recent-post">
+          <a href={`/blog/${post.id.replace('.md', '').replace('.mdx', '')}`} class="recent-post-link">
+            <h4 class="recent-post-title">{post.data.title}</h4>
+            <time class="recent-post-date">
+              {post.data.pubDate.toLocaleDateString('en-us', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </time>
+          </a>
+        </article>
+      ))}
+    </div>
+    <a href="/blog" class="view-all-posts">View All Posts →</a>
+  </div>
+</aside>
+
+<style>
+  .legal-sidebar {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid rgb(var(--gray-light));
+    overflow: hidden;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+  }
+  
+  .legal-sidebar .sidebar-section {
+    padding: 1.5rem;
+  }
+  
+  .legal-sidebar .sidebar-section:not(:last-child) {
+    border-bottom: 1px solid rgb(var(--gray-light));
+  }
+  
+  .legal-sidebar .sidebar-section h3 {
+    margin: 0 0 1rem 0 !important;
+    font-size: 1.1rem !important;
+    font-weight: 600;
+    color: rgb(var(--gray-dark));
+  }
+  
+  .legal-sidebar .legal-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .legal-sidebar .legal-nav-link {
+    padding: 0.75rem;
+    color: rgb(var(--gray));
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: block;
+  }
+  
+  .legal-sidebar .legal-nav-link:hover {
+    background: rgb(var(--gray-light));
+    color: rgb(var(--gray-dark));
+  }
+  
+  .legal-sidebar .legal-nav-link.active {
+    background: var(--accent);
+    color: white;
+  }
+  
+  .legal-sidebar .recent-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .legal-sidebar .recent-post {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .legal-sidebar .recent-post-link {
+    display: block;
+    text-decoration: none;
+    padding: 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+  
+  .legal-sidebar .recent-post-link:hover {
+    background: rgb(var(--gray-light));
+    border-color: rgb(var(--gray-light));
+  }
+  
+  .legal-sidebar .recent-post-title {
+    margin: 0 0 0.5rem 0 !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    color: rgb(var(--gray-dark)) !important;
+    line-height: 1.3 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .legal-sidebar .recent-post-date {
+    font-size: 0.8rem !important;
+    color: rgb(var(--gray)) !important;
+    margin: 0 !important;
+  }
+  
+  .legal-sidebar .view-all-posts {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+  
+  .legal-sidebar .view-all-posts:hover {
+    color: var(--accent-dark);
+  }
+  
+  @media (max-width: 768px) {
+    .legal-sidebar {
+      position: static;
+      margin-top: 2rem;
+    }
+  }
+</style>

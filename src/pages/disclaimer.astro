@@ -1,0 +1,265 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LegalSidebar from '../components/LegalSidebar.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead 
+			title={`Disclaimer - ${SITE_TITLE}`} 
+			description="Disclaimer for Yayan Deka's personal website and blog - Important information about content accuracy and liability"
+		/>
+		<style>
+			.legal-layout {
+				display: grid;
+				grid-template-columns: 1fr 300px;
+				gap: 3rem;
+				align-items: start;
+			}
+			
+			.legal-content {
+				line-height: 1.8;
+				min-width: 0; /* Prevent overflow */
+			}
+			
+			.legal-content h1 {
+				color: rgb(var(--gray-dark));
+				margin-bottom: 1rem;
+				font-size: 2.5rem;
+			}
+			
+			.last-updated {
+				color: rgb(var(--gray));
+				font-style: italic;
+				margin-bottom: 2rem;
+				padding: 1rem;
+				background: rgb(var(--gray-light));
+				border-radius: 8px;
+			}
+			
+			.legal-content h2 {
+				color: rgb(var(--gray-dark));
+				margin-top: 2.5rem;
+				margin-bottom: 1rem;
+				font-size: 1.5rem;
+				border-bottom: 2px solid var(--accent);
+				padding-bottom: 0.5rem;
+			}
+			
+			.legal-content h3 {
+				color: rgb(var(--gray-dark));
+				margin-top: 2rem;
+				margin-bottom: 0.75rem;
+				font-size: 1.2rem;
+			}
+			
+			.legal-content p {
+				margin-bottom: 1.5rem;
+				color: rgb(var(--gray-dark));
+			}
+			
+			.legal-content ul {
+				margin-bottom: 1.5rem;
+				padding-left: 2rem;
+			}
+			
+			.legal-content li {
+				margin-bottom: 0.5rem;
+				color: rgb(var(--gray-dark));
+			}
+			
+			.contact-info {
+				background: #f8fafc;
+				padding: 1.5rem;
+				border-radius: 8px;
+				border-left: 4px solid var(--accent);
+				margin: 2rem 0;
+			}
+			
+			.contact-info h3 {
+				margin-top: 0;
+			}
+			
+			.warning-notice {
+				background: #fef2f2;
+				border: 1px solid #f87171;
+				padding: 1.5rem;
+				border-radius: 8px;
+				margin: 2rem 0;
+			}
+			
+			.warning-notice h3 {
+				color: #dc2626;
+				margin-top: 0;
+			}
+			
+			.info-notice {
+				background: #f0f9ff;
+				border: 1px solid #38bdf8;
+				padding: 1.5rem;
+				border-radius: 8px;
+				margin: 2rem 0;
+			}
+			
+			.info-notice h3 {
+				color: #0284c7;
+				margin-top: 0;
+			}
+			
+			@media (max-width: 768px) {
+				.legal-layout {
+					grid-template-columns: 1fr;
+					gap: 2rem;
+				}
+				
+				.legal-content h1 {
+					font-size: 2rem;
+				}
+				
+				.legal-content h2 {
+					font-size: 1.3rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="legal-layout">
+				<div class="legal-content">
+				<h1>Disclaimer</h1>
+				
+				<div class="last-updated">
+					<strong>Last Updated:</strong> September 1, 2025
+				</div>
+
+				<p>
+					The information contained on this website (yayandeka.com) is for general information purposes only. The information is provided by Yayan Deka and while we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.
+				</p>
+
+				<div class="warning-notice">
+					<h3>Important Warning</h3>
+					<p>
+						Any reliance you place on such information is therefore strictly at your own risk. In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.
+					</p>
+				</div>
+
+				<h2>Website Content Disclaimer</h2>
+
+				<h3>Educational Purpose</h3>
+				<p>
+					The content on this website, including blog posts, tutorials, and technical articles, is intended for educational and informational purposes only. While we strive to provide accurate and up-to-date information, the field of technology is constantly evolving, and information may become outdated.
+				</p>
+
+				<h3>No Professional Advice</h3>
+				<p>
+					The information on this website does not constitute professional advice. You should not act or refrain from acting based on any content included on this website without seeking professional or specialist advice relevant to your particular circumstances.
+				</p>
+
+				<h2>Technical Content Disclaimer</h2>
+
+				<h3>Code Examples and Tutorials</h3>
+				<p>
+					Code examples, tutorials, and technical guides provided on this website are offered for educational purposes. While we test our code and tutorials, we cannot guarantee they will work in every environment or situation. Users should:
+				</p>
+				<ul>
+					<li>Test all code in a development environment before production use</li>
+					<li>Understand the code before implementing it in their projects</li>
+					<li>Keep backups of their work before making changes</li>
+					<li>Use proper version control practices</li>
+				</ul>
+
+				<h3>Software and Tools</h3>
+				<p>
+					References to software, tools, frameworks, or technologies do not constitute endorsements. We are not responsible for any issues arising from the use of third-party software or tools mentioned on this website.
+				</p>
+
+				<h2>External Links Disclaimer</h2>
+
+				<p>
+					Through this website, you can link to other websites which are not under our control. We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.
+				</p>
+
+				<div class="info-notice">
+					<h3>Third-Party Content</h3>
+					<p>
+						We are not responsible for the content of linked websites. External links are provided for convenience and informational purposes only; they do not constitute an endorsement or approval of any products, services, or opinions of the corporation, organization, or individual.
+					</p>
+				</div>
+
+				<h2>Professional Services Disclaimer</h2>
+
+				<h3>Consulting and Development Work</h3>
+				<p>
+					Any information about professional services, consulting, or development work is provided for general information only. Specific project requirements, timelines, and deliverables will be outlined in separate professional agreements.
+				</p>
+
+				<h3>Portfolio and Case Studies</h3>
+				<p>
+					Portfolio items and case studies represent past work and achievements. Results and outcomes from previous projects do not guarantee similar results for future projects, as each project has unique requirements and circumstances.
+				</p>
+
+				<h2>Creative Work Disclaimer</h2>
+
+				<h3>Vector Design and Artwork</h3>
+				<p>
+					References to creative work, including vector design and artwork, are for portfolio and informational purposes. Licensing terms for creative work may vary and are subject to the terms of the respective platforms where the work is published.
+				</p>
+
+				<h3>Writing and Publications</h3>
+				<p>
+					Creative writing, articles, and publications represent personal opinions and experiences. They should not be considered as professional advice or authoritative statements on any topic.
+				</p>
+
+				<h2>Availability Disclaimer</h2>
+
+				<p>
+					Every effort is made to keep the website up and running smoothly. However, we take no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.
+				</p>
+
+				<h2>Changes and Updates</h2>
+
+				<p>
+					The information on this website may be changed or updated without notice. We may also make improvements and/or changes to the products, services, or programs described on this website at any time without notice.
+				</p>
+
+				<h2>Personal Opinions</h2>
+
+				<p>
+					Unless otherwise stated, the views and opinions expressed on this website are those of Yayan Deka personally and do not represent the views or opinions of any organization, employer, or entity with which the author may be affiliated.
+				</p>
+
+				<h2>Use at Your Own Risk</h2>
+
+				<p>
+					The use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services, or information available through this website meet your specific requirements.
+				</p>
+
+				<h2>Contact for Corrections</h2>
+
+				<p>
+					If you notice any inaccuracies, errors, or outdated information on this website, please contact us so we can address the issue promptly. We appreciate feedback that helps us maintain the quality and accuracy of our content.
+				</p>
+
+				<div class="contact-info">
+					<h3>Contact Information</h3>
+					<p>
+						If you have any questions about this disclaimer or need clarification on any content, please contact us at:
+					</p>
+					<p>
+						<strong>Email:</strong> y.d.krisdiantoro@gmail.com<br>
+						<strong>Website:</strong> <a href="/">yayandeka.com</a>
+					</p>
+				</div>
+				</div>
+				
+				<LegalSidebar />
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

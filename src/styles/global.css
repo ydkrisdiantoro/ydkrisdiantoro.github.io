@@ -44,10 +44,16 @@ body {
 	line-height: 1.7;
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+	max-width: 1200px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 3em 2em;
+}
+
+@media (max-width: 768px) {
+	main {
+		padding: 2em 1em;
+	}
 }
 h1,
 h2,

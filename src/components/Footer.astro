@@ -3,60 +3,207 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Your name here. All rights reserved.
-	<div class="social-links">
-		<a href="https://m.webtoo.ls/@astro" target="_blank">
-			<span class="sr-only">Follow Astro on Mastodon</span>
-			<svg
-				viewBox="0 0 16 16"
-				aria-hidden="true"
-				width="32"
-				height="32"
-				astro-icon="social/mastodon"
-				><path
-					fill="currentColor"
-					d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"
-				></path></svg
-			>
-		</a>
-		<a href="https://twitter.com/astrodotbuild" target="_blank">
-			<span class="sr-only">Follow Astro on Twitter</span>
-			<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/twitter"
-				><path
-					fill="currentColor"
-					d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
-				></path></svg
-			>
-		</a>
-		<a href="https://github.com/withastro/astro" target="_blank">
-			<span class="sr-only">Go to Astro's GitHub repo</span>
-			<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github"
-				><path
-					fill="currentColor"
-					d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-				></path></svg
-			>
-		</a>
+	<div class="footer-content">
+		<div class="footer-section">
+			<h3>Yayan Deka</h3>
+			<p>Full-stack developer and creative professional passionate about building meaningful digital solutions.</p>
+			<div class="social-links">
+				<a href="https://github.com/ydkrisdiantoro" target="_blank" aria-label="GitHub">
+					<svg viewBox="0 0 24 24">
+						<path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+					</svg>
+				</a>
+				<a href="https://www.linkedin.com/in/yayan-dwi-krisdiantoro/" target="_blank" aria-label="LinkedIn">
+					<svg viewBox="0 0 24 24">
+						<path fill="currentColor" d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/>
+					</svg>
+				</a>
+				<a href="https://www.behance.net/yayandeka/stock" target="_blank" aria-label="Behance">
+					<svg viewBox="0 0 24 24">
+						<path fill="currentColor" d="M6.5,4C7.29,4 8.04,4.2 8.75,4.61C9.45,5 10,5.61 10.38,6.38C10.75,7.15 10.94,7.96 10.94,8.81C10.94,9.78 10.71,10.65 10.25,11.42C9.8,12.19 9.15,12.78 8.31,13.19C9.36,13.53 10.18,14.16 10.75,15.06C11.32,15.97 11.61,17 11.61,18.16C11.61,19.14 11.4,20.04 11,20.86C10.55,21.68 9.95,22.32 9.19,22.78C8.43,23.24 7.58,23.47 6.63,23.47H0V4H6.5M6.19,12.15C6.96,12.15 7.59,11.93 8.09,11.5C8.58,11.06 8.83,10.44 8.83,9.63C8.83,8.83 8.58,8.2 8.09,7.77C7.59,7.33 6.96,7.12 6.19,7.12H2.13V12.15H6.19M6.5,20.34C7.34,20.34 8.03,20.09 8.56,19.59C9.09,19.09 9.36,18.4 9.36,17.53C9.36,16.67 9.09,15.97 8.56,15.47C8.03,14.97 7.34,14.72 6.5,14.72H2.13V20.34H6.5Z"/>
+					</svg>
+				</a>
+				<a href="mailto:y.d.krisdiantoro@gmail.com" aria-label="Email">
+					<svg viewBox="0 0 24 24">
+						<path fill="currentColor" d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+		
+		<div class="footer-section">
+			<h4>Legal</h4>
+			<div class="footer-links">
+				<a href="/privacy-policy">Privacy Policy</a>
+				<a href="/terms-of-service">Terms of Service</a>
+				<a href="/disclaimer">Disclaimer</a>
+				<a href="/sitemap.xml">Sitemap</a>
+			</div>
+		</div>
+		
+		<div class="footer-section">
+			<h4>Work</h4>
+			<div class="footer-links">
+				<a href="https://www.freepik.com/search?author=10124037&format=author&last_filter=author&last_value=10124037&sort=recent" target="_blank">Vector Design</a>
+				<a href="https://pengalamanulis.blogspot.com" target="_blank">Creative Writing</a>
+				<a href="https://github.com/ydkrisdiantoro" target="_blank">Open Source</a>
+			</div>
+		</div>
+		
+		<div class="footer-section">
+			<h4>Connect</h4>
+			<div class="footer-links">
+				<a href="https://www.linkedin.com/in/yayan-dwi-krisdiantoro/" target="_blank">Professional</a>
+				<a href="https://instagram.com/y.d.krisdiantoro" target="_blank">Creative</a>
+				<a href="mailto:y.d.krisdiantoro@gmail.com">Contact</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="footer-bottom">
+		<p>&copy; {today.getFullYear()} Yayan Deka. All rights reserved.</p>
+		<p class="footer-credit">Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a></p>
 	</div>
 </footer>
 <style>
 	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
+		background: rgb(var(--gray-dark));
+		color: white;
+		padding: 3rem 2rem 1rem 2rem;
+		margin-top: 4rem;
 	}
+	
+	.footer-content {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr 1fr;
+		gap: 2rem;
+		margin-bottom: 2rem;
+	}
+	
+	.footer-section h3 {
+		color: white;
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+		font-weight: 700;
+	}
+	
+	.footer-section h4 {
+		color: white;
+		font-size: 1.1rem;
+		margin-bottom: 1rem;
+		font-weight: 600;
+	}
+	
+	.footer-section p {
+		color: rgb(var(--gray-light));
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
+	}
+	
+	.footer-links {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	
+	.footer-links a {
+		color: rgb(var(--gray-light));
+		text-decoration: none;
+		transition: all 0.3s ease;
+		font-weight: 500;
+	}
+	
+	.footer-links a:hover {
+		color: white;
+		padding-left: 0.5rem;
+	}
+	
 	.social-links {
 		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
+		gap: 1rem;
+		margin-top: 0.5rem;
 	}
+	
 	.social-links a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		background: rgba(255, 255, 255, 0.1);
+		border-radius: 50%;
+		color: rgb(var(--gray-light));
+		transition: all 0.3s ease;
 		text-decoration: none;
-		color: rgb(var(--gray));
 	}
+	
 	.social-links a:hover {
-		color: rgb(var(--gray-dark));
+		background: var(--accent);
+		color: white;
+		transform: translateY(-3px);
+	}
+	
+	.social-links svg {
+		width: 20px;
+		height: 20px;
+		fill: currentColor;
+	}
+	
+	.footer-bottom {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding-top: 2rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+	
+	.footer-bottom p {
+		margin: 0;
+		color: rgb(var(--gray-light));
+		font-size: 0.9rem;
+	}
+	
+	.footer-credit a {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 600;
+	}
+	
+	.footer-credit a:hover {
+		text-decoration: underline;
+	}
+	
+	@media (max-width: 968px) {
+		.footer-content {
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem;
+		}
+	}
+	
+	@media (max-width: 640px) {
+		footer {
+			padding: 2rem 1rem 1rem 1rem;
+		}
+		
+		.footer-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+		
+		.footer-bottom {
+			flex-direction: column;
+			text-align: center;
+			gap: 0.5rem;
+		}
+		
+		.social-links {
+			justify-content: center;
+		}
 	}
 </style>
