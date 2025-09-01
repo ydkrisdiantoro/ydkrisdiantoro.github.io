@@ -1,62 +1,78 @@
-# Astro Starter Kit: Blog
+
+# Yayandeka Astro Blog
+
+This is a personal blog project built with [Astro](https://astro.build/). It features a clean design, SEO best practices, and support for Markdown/MDX content.
+
+## � Project Structure
+
+```
+├── astro.config.mjs         # Astro configuration
+├── package.json             # Project dependencies and scripts
+├── tsconfig.json            # TypeScript configuration
+├── public/                  # Static assets (images, icons, fonts, manifest)
+│   ├── fonts/               # Custom web fonts
+│   └── images/              # Blog and site images
+├── src/
+│   ├── assets/              # Local images for posts and pages
+│   ├── components/          # Astro UI components (Header, Footer, Sidebar, etc.)
+│   ├── content/             # Blog content (Markdown/MDX)
+│   │   └── blog/            # Blog posts
+│   ├── layouts/             # Page and post layouts
+│   ├── pages/               # Site pages and routes
+│   │   ├── blog/            # Blog listing, categories, and post routes
+│   │   └── ...              # About, projects, legal, etc.
+│   ├── styles/              # Global CSS
+│   └── utils/               # Utility scripts (e.g., categories)
+└── README.md                # Project documentation
+```
+
+## 🚀 Features
+
+- Minimal, accessible styling
+- 100/100 Lighthouse performance
+- SEO-friendly (OpenGraph, canonical URLs)
+- Sitemap and RSS feed
+- Markdown & MDX support
+- Category-based blog navigation
+- Responsive design
+
+## 🧑‍💻 Usage
+
+Install dependencies:
 
 ```sh
-npm create astro@latest -- --template blog
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Start the development server:
 
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```sh
+npm run dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Build for production:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```sh
+npm run build
+```
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+Preview the production build:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```sh
+npm run preview
+```
 
-## 🧞 Commands
+## ✍️ Content Authoring
 
-All commands are run from the root of the project, from a terminal:
+- Add new blog posts in `src/content/blog/` as `.md` or `.mdx` files.
+- Static assets (images, icons, fonts) go in `public/`.
+- Customize layouts and components in `src/layouts/` and `src/components/`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## � Resources
 
-## 👀 Want to learn more?
+- [Astro Documentation](https://docs.astro.build/)
+- [Content Collections Guide](https://docs.astro.build/en/guides/content-collections/)
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
 
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Inspired by [Bear Blog](https://github.com/HermanMartinus/bearblog/).
