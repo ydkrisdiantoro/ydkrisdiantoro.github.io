@@ -10,36 +10,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<head>
 		<BaseHead title={`Projects - ${SITE_TITLE}`} description="Portfolio of selected projects and work" />
 		<style>
-			.projects-hero {
-				text-align: center;
-				margin-bottom: 3rem;
-			}
-			
-			.projects-hero h1 {
-				font-size: 2.5rem;
-				margin-bottom: 1rem;
-				color: rgb(var(--gray-dark));
-			}
-			
-			.projects-hero p {
-				font-size: 1.2rem;
-				color: rgb(var(--gray));
-				max-width: 600px;
-				margin: 0 auto;
-			}
-			
 			.section {
 				margin-bottom: 3rem;
-			}
-			
-			.section h2 {
-				font-size: 1.8rem;
-				margin-bottom: 1.5rem;
-				color: rgb(var(--gray-dark));
-				font-weight: 600;
-				border-bottom: 2px solid var(--accent);
-				padding-bottom: 0.5rem;
-				display: inline-block;
 			}
 			
 			.projects-list {
@@ -90,7 +62,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			.project-icon {
 				width: 48px;
 				height: 48px;
-				background: linear-gradient(135deg, var(--accent), #60a5fa);
+				background: linear-gradient(135deg, var(--accent), var(--blue-400));
 				border-radius: 10px;
 				display: flex;
 				align-items: center;
@@ -163,7 +135,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				width: 8px;
 				height: 8px;
 				border-radius: 50%;
-				background: #10b981;
+				background: var(--green-500);
 			}
 			
 			.project-actions {
@@ -241,7 +213,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				top: 0;
 				bottom: 0;
 				width: 4px;
-				background: linear-gradient(135deg, #f59e0b, #ef4444);
+				background: linear-gradient(135deg, var(--orange-500), var(--red-500));
 				transform: scaleY(0);
 				transition: transform 0.2s ease;
 			}
@@ -260,7 +232,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			.creative-icon {
 				width: 40px;
 				height: 40px;
-				background: linear-gradient(135deg, #f59e0b, #ef4444);
+				background: linear-gradient(135deg, var(--orange-500), var(--red-500));
 				border-radius: 8px;
 				display: flex;
 				align-items: center;
@@ -293,7 +265,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				align-items: center;
 				gap: 0.4rem;
 				padding: 0.4rem 0.8rem;
-				background: linear-gradient(135deg, #f59e0b, #ef4444);
+				background: linear-gradient(135deg, var(--orange-500), var(--red-500));
 				color: white;
 				text-decoration: none;
 				border-radius: 6px;
@@ -338,13 +310,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<div class="projects-hero">
+			<div class="page-hero">
 				<h1>Projects & Work</h1>
 				<p>A collection of selected projects showcasing development skills, creative design work, and technical solutions.</p>
 			</div>
 
 			<section class="section">
-				<h2>Development Projects</h2>
+				<h2 class="section-title">Development Projects</h2>
 				<div class="projects-list">
 					<div class="project-item">
 						<div class="project-header">
@@ -460,7 +432,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			</section>
 
 			<section class="section">
-				<h2>Creative Work</h2>
+				<h2 class="section-title">Creative Work</h2>
 				<div class="creative-list">
 					<div class="creative-item">
 						<div class="creative-header">
