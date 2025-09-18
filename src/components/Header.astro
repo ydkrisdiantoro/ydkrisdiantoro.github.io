@@ -8,14 +8,12 @@ import HeaderLink from './HeaderLink.astro';
 		<div class="logo">
 			<a href="/" aria-label="Home">
 				<img src="/logo-dark.svg" alt={SITE_TITLE} class="logo-img" />
-				<span class="site-name">{SITE_TITLE}</span>
 			</a>
 		</div>
 		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/projects">Projects</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/">HOME</HeaderLink>
+			<HeaderLink href="/blog">BLOG</HeaderLink>
+			<HeaderLink href="/about">ABOUT</HeaderLink>
 		</div>
 		<div class="social-links">
 			<a href="https://github.com/ydkrisdiantoro" target="_blank" aria-label="GitHub Profile">
@@ -60,6 +58,7 @@ import HeaderLink from './HeaderLink.astro';
 	.logo {
 		display: flex;
 		align-items: center;
+		transition: all 0.3s ease;
 	}
 	
 	.logo a {
@@ -71,31 +70,24 @@ import HeaderLink from './HeaderLink.astro';
 		padding: 0.5rem 0.75rem;
 		border-radius: 8px;
 		margin-left: -0.75rem;
-	}
-	
-	.logo a:hover {
-		transform: translateY(-1px);
-		background: rgba(var(--gray-light), 0.3);
+		color: var(--gray-dark);
 	}
 	
 	.logo-img {
-		height: 40px;
+		height: 24px;
 		width: auto;
 		max-width: 200px;
+	}
+	.logo:hover {
+		transform: translateY(-2px);
 	}
 	
 	.site-name {
 		font-size: 1.5rem;
-		font-weight: 600;
 		color: rgb(var(--gray-dark));
 		white-space: nowrap;
 		letter-spacing: -0.02em;
 		transition: color 0.3s ease;
-		font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-	}
-	
-	.logo a:hover .site-name {
-		color: var(--accent);
 	}
 	
 	.internal-links {
@@ -104,23 +96,27 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	
 	.internal-links a {
-		padding: 0.75rem 1rem;
+		margin: 0.75rem 1rem;
 		color: var(--gray-dark);
-		border-radius: 6px;
 		text-decoration: none;
-		font-weight: 500;
-		transition: all 0.3s ease;
 		position: relative;
+		border-top: 2px solid transparent;
+		border-bottom: 2px solid transparent;
+		transition: all 0.3s ease;
 	}
 	
 	.internal-links a:hover {
 		color: var(--accent);
 		background: var(--gray-light);
+		border-bottom: 2px solid var(--accent);
+		transform: translateY(-2px);
 	}
 	
 	.internal-links a.active {
 		color: var(--accent);
 		background: var(--gray-light);
+		transform: translateY(-2px);
+		border-bottom: 2px solid var(--accent);
 	}
 	
 	.social-links {
@@ -162,10 +158,6 @@ import HeaderLink from './HeaderLink.astro';
 			height: 60px;
 		}
 		
-		.logo-img {
-			height: 32px;
-		}
-		
 		.site-name {
 			display: none;
 		}
@@ -175,7 +167,7 @@ import HeaderLink from './HeaderLink.astro';
 		}
 		
 		.internal-links a {
-			padding: 0.5rem 0.75rem;
+			margin: 0.5rem 0.75rem;
 			font-size: 0.9rem;
 		}
 		
