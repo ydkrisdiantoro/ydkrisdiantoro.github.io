@@ -6,7 +6,7 @@ const today = new Date();
 	<div class="footer-content">
 		<div class="footer-section">
 			<h3>Yayan Deka</h3>
-			<p>Full-stack developer and creative professional passionate about building meaningful digital solutions.</p>
+			<p>Full-stack developer, Vector Designer, dan Penulis Jadi-jadian yang pikirannya random tapi ngangenin.</p>
 			<div class="social-links">
 				<a href="https://github.com/ydkrisdiantoro" target="_blank" aria-label="GitHub">
 					<svg viewBox="0 0 24 24">
@@ -31,31 +31,22 @@ const today = new Date();
 			</div>
 		</div>
 		
-		<div class="footer-section">
-			<h4>Legal</h4>
-			<div class="footer-links">
-				<a href="/privacy-policy">Privacy Policy</a>
-				<a href="/terms-of-service">Terms of Service</a>
-				<a href="/disclaimer">Disclaimer</a>
-				<a href="/sitemap.xml">Sitemap</a>
+		<div class="footer-section" id="legal-contact">
+			<div>
+				<h4>Legal</h4>
+				<div class="footer-links">
+					<a href="/privacy-policy">Privacy Policy</a>
+					<a href="/terms-of-service">Terms of Service</a>
+					<a href="/disclaimer">Disclaimer</a>
+					<a href="/sitemap.xml">Sitemap</a>
+				</div>
 			</div>
-		</div>
-		
-		<div class="footer-section">
-			<h4>Work</h4>
-			<div class="footer-links">
-				<a href="https://www.freepik.com/search?author=10124037&format=author&last_filter=author&last_value=10124037&sort=recent" target="_blank">Vector Design</a>
-				<a href="https://pengalamanulis.blogspot.com" target="_blank">Creative Writing</a>
-				<a href="https://github.com/ydkrisdiantoro" target="_blank">Open Source</a>
-			</div>
-		</div>
-		
-		<div class="footer-section">
-			<h4>Connect</h4>
-			<div class="footer-links">
-				<a href="https://www.linkedin.com/in/yayan-dwi-krisdiantoro/" target="_blank">Professional</a>
-				<a href="https://instagram.com/y.d.krisdiantoro" target="_blank">Creative</a>
-				<a href="mailto:y.d.krisdiantoro@gmail.com">Contact</a>
+			<div>
+				<h4>Social</h4>
+				<div class="footer-links">
+					<a href="https://instagram.com/y.d.krisdiantoro" target="_blank">Instagram</a>
+					<a href="https://www.youtube.com/@yayandeka" target="_blank">Youtube</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -77,9 +68,15 @@ const today = new Date();
 		max-width: 1200px;
 		margin: 0 auto;
 		display: grid;
-		grid-template-columns: 2fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
 		gap: 2rem;
 		margin-bottom: 2rem;
+	}
+
+	.footer-content #legal-contact {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
 	}
 	
 	.footer-section h3 {
@@ -181,14 +178,14 @@ const today = new Date();
 	
 	@media (max-width: 968px) {
 		.footer-content {
-			grid-template-columns: 1fr 1fr;
+			/* grid-template-columns: 2fr 1fr; */
 			gap: 2rem;
 		}
 	}
 	
 	@media (max-width: 640px) {
 		footer {
-			padding: 2rem 1rem 1rem 1rem;
+			padding: 2rem 1rem 1rem;
 		}
 		
 		.footer-content {
