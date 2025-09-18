@@ -14,42 +14,6 @@ import { SITE_TITLE } from '../consts';
 			description="Disclaimer for Yayan Deka's personal website and blog - Important information about content accuracy and liability"
 		/>
 		<style>
-			.legal-layout {
-				display: grid;
-				grid-template-columns: 1fr 300px;
-				gap: 3rem;
-				align-items: start;
-			}
-			
-			.legal-content {
-				line-height: 1.8;
-				min-width: 0; /* Prevent overflow */
-			}
-			
-			.legal-content h1 {
-				color: rgb(var(--gray-dark));
-				margin-bottom: 1rem;
-				font-size: 2.5rem;
-			}
-			
-			.last-updated {
-				color: rgb(var(--gray));
-				font-style: italic;
-				margin-bottom: 2rem;
-				padding: 1rem;
-				background: rgb(var(--gray-light));
-				border-radius: 8px;
-			}
-			
-			.legal-content h2 {
-				color: rgb(var(--gray-dark));
-				margin-top: 2.5rem;
-				margin-bottom: 1rem;
-				font-size: 1.5rem;
-				border-bottom: 2px solid var(--accent);
-				padding-bottom: 0.5rem;
-			}
-			
 			.legal-content h3 {
 				color: rgb(var(--gray-dark));
 				margin-top: 2rem;
@@ -71,59 +35,6 @@ import { SITE_TITLE } from '../consts';
 				margin-bottom: 0.5rem;
 				color: rgb(var(--gray-dark));
 			}
-			
-			.contact-info {
-				background: #f8fafc;
-				padding: 1.5rem;
-				border-radius: 8px;
-				border-left: 4px solid var(--accent);
-				margin: 2rem 0;
-			}
-			
-			.contact-info h3 {
-				margin-top: 0;
-			}
-			
-			.warning-notice {
-				background: #fef2f2;
-				border: 1px solid #f87171;
-				padding: 1.5rem;
-				border-radius: 8px;
-				margin: 2rem 0;
-			}
-			
-			.warning-notice h3 {
-				color: #dc2626;
-				margin-top: 0;
-			}
-			
-			.info-notice {
-				background: #f0f9ff;
-				border: 1px solid #38bdf8;
-				padding: 1.5rem;
-				border-radius: 8px;
-				margin: 2rem 0;
-			}
-			
-			.info-notice h3 {
-				color: #0284c7;
-				margin-top: 0;
-			}
-			
-			@media (max-width: 768px) {
-				.legal-layout {
-					grid-template-columns: 1fr;
-					gap: 2rem;
-				}
-				
-				.legal-content h1 {
-					font-size: 2rem;
-				}
-				
-				.legal-content h2 {
-					font-size: 1.3rem;
-				}
-			}
 		</style>
 	</head>
 	<body>
@@ -141,7 +52,7 @@ import { SITE_TITLE } from '../consts';
 					The information contained on this website (yayandeka.com) is for general information purposes only. The information is provided by Yayan Deka and while we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.
 				</p>
 
-				<div class="warning-notice">
+				<div class="notice-error">
 					<h3>Important Warning</h3>
 					<p>
 						Any reliance you place on such information is therefore strictly at your own risk. In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.
@@ -184,7 +95,7 @@ import { SITE_TITLE } from '../consts';
 					Through this website, you can link to other websites which are not under our control. We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.
 				</p>
 
-				<div class="info-notice">
+				<div class="notice-info">
 					<h3>Third-Party Content</h3>
 					<p>
 						We are not responsible for the content of linked websites. External links are provided for convenience and informational purposes only; they do not constitute an endorsement or approval of any products, services, or opinions of the corporation, organization, or individual.
