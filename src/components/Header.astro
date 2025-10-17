@@ -11,8 +11,9 @@ import HeaderLink from './HeaderLink.astro';
 			</a>
 		</div>
 		<div class="internal-links">
-			<HeaderLink href="/">HOME</HeaderLink>
+			<!-- <HeaderLink href="/">HOME</HeaderLink> -->
 			<HeaderLink href="/blog">BLOG</HeaderLink>
+			<HeaderLink href="/projects">PROJECTS</HeaderLink>
 			<HeaderLink href="/about">ABOUT</HeaderLink>
 		</div>
 		<div class="social-links">
@@ -108,15 +109,11 @@ import HeaderLink from './HeaderLink.astro';
 	.internal-links a:hover {
 		color: var(--accent);
 		background: var(--gray-light);
-		border-bottom: 2px solid var(--accent);
-		transform: translateY(-2px);
 	}
 	
 	.internal-links a.active {
 		color: var(--accent);
 		background: var(--gray-light);
-		transform: translateY(-2px);
-		border-bottom: 2px solid var(--accent);
 	}
 	
 	.social-links {
