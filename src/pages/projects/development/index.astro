@@ -1,0 +1,95 @@
+---
+import BaseHead from '../../../components/BaseHead.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ProjectNavigation from '../../../components/ProjectNavigation.astro';
+import { SITE_TITLE } from '../../../consts';
+
+const pageTitle = `Development Projects | ${SITE_TITLE}`;
+const pageDescription = 'Catatan proyek development Yayan Deka: struktur, stack, dan pola kolaborasi.';
+---
+
+<!doctype html>
+<html lang="id">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+		<style>
+			.project-nav-wrap {
+				display: flex;
+				justify-content: center;
+				margin: 2.5rem 0 3rem;
+				flex-wrap: wrap;
+			}
+			.category-hero {
+				background: linear-gradient(135deg, rgba(42, 161, 152, 0.12), #fff);
+				padding: 4rem 2.5rem;
+				border-radius: 24px;
+				border: 1px solid var(--slate-200);
+				box-shadow: 0 20px 48px rgba(148, 163, 184, 0.16);
+				position: relative;
+				overflow: hidden;
+			}
+			.category-hero::after {
+				content: '';
+				position: absolute;
+				right: -15%;
+				bottom: -20%;
+				width: 300px;
+				height: 300px;
+				background: radial-gradient(circle at center, rgba(42, 161, 152, 0.22), transparent 70%);
+				z-index: 0;
+			}
+			.category-hero > * {
+				position: relative;
+				z-index: 1;
+			}
+			.category-hero h1 {
+				margin-bottom: 1rem;
+				color: var(--slate-800);
+				font-size: clamp(2.3rem, 3.5vw, 3rem);
+			}
+			.category-hero p {
+				max-width: 760px;
+				margin: 0 auto;
+				color: var(--slate-600);
+				line-height: 1.8;
+			}
+			.category-hero .meta {
+				margin-top: 2.25rem;
+				display: flex;
+				justify-content: center;
+				gap: 1rem;
+				flex-wrap: wrap;
+			}
+			.category-hero .meta span {
+				background: rgba(255, 255, 255, 0.65);
+				border: 1px solid rgba(148, 163, 184, 0.5);
+				padding: 0.5rem 1rem;
+				border-radius: 999px;
+				font-size: 0.88rem;
+				color: var(--slate-600);
+			}
+			@media (max-width: 768px) {
+				.project-nav-wrap {
+					margin: 1.5rem 0 2.5rem;
+				}
+				.category-hero {
+					padding: 3rem 1.75rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="project-nav-wrap">
+				<ProjectNavigation current="development" />
+			</div>
+			<section class="category-hero page-hero">
+				<h1>UNDER DEVELOPMMENT</h1>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

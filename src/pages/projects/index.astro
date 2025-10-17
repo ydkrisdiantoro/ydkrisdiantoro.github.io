@@ -1,0 +1,235 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+
+const pageTitle = `Projects | ${SITE_TITLE}`;
+const pageDescription = 'Pengantar tiga jalur proyek Yayan Deka: development, design, dan writing.';
+---
+
+<!doctype html>
+<html lang="id">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+		<style>
+			.projects-hero {
+				text-align: center;
+				padding: 0 2.5rem;
+				margin-bottom: 3rem;
+			}
+			.projects-hero p {
+				max-width: 720px;
+				margin: 0 auto;
+				color: var(--slate-600);
+				line-height: 1.8;
+				font-size: 1.1rem;
+			}
+			.projects-meta {
+				margin-top: 2rem;
+				display: flex;
+				justify-content: center;
+				gap: 1rem;
+				flex-wrap: wrap;
+			}
+			.projects-meta span {
+				background: rgba(15, 23, 42, 0.05);
+				border: 1px solid rgba(148, 163, 184, 0.4);
+				padding: 0.55rem 1.1rem;
+				border-radius: 999px;
+				font-size: 0.9rem;
+				color: var(--slate-600);
+			}
+			.category-overview {
+				margin: 4rem 0 0;
+			}
+			.category-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 2.25rem;
+			}
+			.category-card {
+				background: #fff;
+				border-radius: 20px;
+				padding: 2.25rem 2rem;
+				border: 1px solid var(--slate-200);
+				display: flex;
+				flex-direction: column;
+				gap: 1.25rem;
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+				box-shadow: 0 12px 24px rgba(148, 163, 184, 0.12);
+			}
+			.category-card h3 {
+				margin: 0;
+				font-size: 1.7rem;
+				color: var(--slate-800);
+			}
+			.category-card p {
+				margin: 0;
+				color: var(--slate-600);
+				line-height: 1.7;
+			}
+			.category-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+			}
+			.category-tags span {
+				background: rgba(42, 161, 152, 0.12);
+				color: var(--accent);
+				border-radius: 999px;
+				padding: 0.35rem 0.75rem;
+				font-size: 0.75rem;
+				font-weight: 600;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+			}
+			.category-link {
+				display: flex;
+				justify-content: flex-end;
+				gap: 0.5rem;
+				font-size: .75rem;
+				text-decoration: none;
+				color: var(--accent);
+				background-color: white;
+				border: 1px solid var(--slate-200);
+				border-radius: 1rem;
+				text-transform: uppercase;
+				font-weight: 600;
+				padding: 0.4rem 1rem;
+				transition: background-color .15s ease, color .15s ease, transform .06s ease, border-color .15s ease;
+			}
+			.category-link:hover {
+				background: var(--accent);
+				color: white;
+				border-color: var(--accent);
+				transform: translateY(-1px);
+			}
+			.projects-offering {
+				margin: 5rem 0 0 0;
+				text-align: center;
+				padding: 3.5rem 2.5rem;
+				background: var(--slate-50);
+				border-radius: 18px;
+				border: 1px solid var(--slate-200);
+			}
+			.projects-offering h2 {
+				margin-bottom: 1.2rem;
+			}
+			.projects-offering p {
+				margin: 0 auto 2rem;
+				max-width: 700px;
+				color: var(--slate-500);
+				font-size: 1rem;
+				line-height: 1.75;
+			}
+			.projects-meta {
+				max-width: 700px;
+				display: flex;
+				justify-content: center;
+				gap: 0.75rem;
+				flex-wrap: wrap;
+				margin: 0 auto 2.25rem;
+			}
+			.projects-meta span {
+				background: #fff;
+				border: 1px solid var(--slate-200);
+				padding: 0.6rem 1.2rem;
+				border-radius: 999px;
+				font-size: 0.9rem;
+				color: var(--slate-600);
+				box-shadow: 0 10px 24px rgba(148, 163, 184, 0.16);
+			}
+			@media (max-width: 768px) {
+				.category-card {
+					padding: 2rem 1.75rem;
+				}
+				.projects-offering {
+					padding: 2.5rem 1.75rem;
+				}
+			}
+			@media (max-width: 520px) {
+				.projects-meta span {
+					width: 100%;
+					text-align: center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="projects-hero page-hero">
+				<h1><span class="highlight">Projects</span> &amp; Work</h1>
+				<p class="intro">
+					Tempat saya menyimpan <span>hal-hal yang pernah dan sedang saya kerjakan.</span> Mulai dari <span>website</span> yang saya kembangkan, <span>desain grafis</span>, sampai <span>tulisan-tulisan</span> yang tertuang dari selaksa perasaan dan isi kepala.
+				</p>
+			</section>
+
+			<section class="category-overview">
+				<div class="category-grid">
+					<article class="category-card">
+						<div class="category-tags">
+							<span>Website</span>
+							<span>Mobile Apps</span>
+						</div>
+						<h3>Development</h3>
+						<p>
+							Proyek pengembangan web dengan Laravel, Next.js, dan Astro. Beberapa dibuat dengan PHP native, Vanilla JS, HTML, dan CSS murni, termasuk aplikasi Android sederhana menggunakan Android Studio.
+						</p>
+						<a class="category-link" href="/projects/development/">
+							<span class="more">Baca Selengkapnya</span>
+						</a>
+					</article>
+					<article class="category-card">
+						<div class="category-tags">
+							<span>Vector</span>
+							<span>Draw</span>
+							<span>Paint</span>
+						</div>
+						<h3>Design</h3>
+						<p>
+							Kumpulan ilustrasi vektor untuk platform microstock seperti Freepik, Adobe Stock, dan Vecteezy. Ada juga beberapa eksperimen desain personal serta aset visual untuk kebutuhan proyek web.
+						</p>
+						<a class="category-link" href="/projects/design/">
+							<span class="more">Baca Selengkapnya</span>
+						</a>
+					</article>
+					<article class="category-card">
+						<div class="category-tags">
+							<span>Novel</span>
+							<span>Cerpen</span>
+							<span>Puisi</span>
+						</div>
+						<h3>Writing</h3>
+						<p>
+							Kumpulan tulisan fiksi, puisi, dan draf novel yang masih terus dikembangkan. Sebagian sudah diterbitkan di blog, sebagian lainnya masih menjadi ruang eksplorasi ide dan gaya bercerita.
+						</p>
+						<a class="category-link" href="/projects/writing/">
+							<span class="more">Baca Selengkapnya</span>
+						</a>
+					</article>
+				</div>
+			</section>
+
+			<section class="projects-offering">
+				<h2 class="section-title">Siap Berkolaborasi?</h2>
+				<p>
+					Semua proyek di sini lahir dari keingintahuan. Kalau kamu juga punya sesuatu yang ingin diwujudkan, mungkin jalur kita bisa
+					bersinggungan sebentar&mdash;untuk menciptakan sesuatu yang belum ada. Saya biasanya memulai dari percakapan singkat, memetakan
+					scope yang realistis, lalu menyiapkan dokumentasi ringan supaya timmu mudah melanjutkan.
+				</p>
+				<div class="projects-meta">
+					<span>Basis: Semarang, siap remote &amp; hibrid</span>
+					<span>Respons awal 1&ndash;2 hari kerja</span>
+					<span>Fokus: pembuatan website, desain grafis, tulisan fiksi</span>
+				</div>
+				<div class="offering-actions">
+					<a class="btn primary" href="mailto:y.d.krisdiantoro@gmail.com?subject=Diskusi%20proyek">Kirim email singkat</a>
+				</div>
+			</section>
+
+		</main>
+		<Footer />
+	</body>
+</html>
