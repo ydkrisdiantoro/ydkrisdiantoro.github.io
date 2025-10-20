@@ -9,6 +9,7 @@
 
 	/* Accent with opacity */
 	--accent-trans: rgba(42, 161, 152, 0.3);
+	--accent-trans-2: rgba(42, 161, 152, 0.2);
 
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;

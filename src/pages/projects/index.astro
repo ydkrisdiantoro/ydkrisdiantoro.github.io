@@ -85,25 +85,27 @@ const pageDescription = 'Pengantar tiga jalur proyek Yayan Deka: development, de
 				text-transform: uppercase;
 			}
 			.category-link {
-				display: flex;
-				justify-content: flex-end;
 				gap: 0.5rem;
 				font-size: .75rem;
 				text-decoration: none;
+				text-align: center;
 				color: var(--accent);
-				background-color: white;
 				border: 1px solid var(--slate-200);
 				border-radius: 1rem;
 				text-transform: uppercase;
 				font-weight: 600;
 				padding: 0.4rem 1rem;
-				transition: background-color .15s ease, color .15s ease, transform .06s ease, border-color .15s ease;
+				transform: translate();
+				transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+				background: var(--accent-trans-2);
+				border-bottom: .2rem solid transparent;
 			}
 			.category-link:hover {
-				background: var(--accent);
 				color: white;
 				border-color: var(--accent);
 				transform: translateY(-1px);
+				background: var(--accent);
+				border-bottom: .2rem solid var(--accent-dark);
 			}
 			.projects-offering {
 				margin: 5rem 0 0 0;
