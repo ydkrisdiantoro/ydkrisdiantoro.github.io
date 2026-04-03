@@ -12,26 +12,6 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://yayandeka.com/projects</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://yayandeka.com/projects/design</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://yayandeka.com/projects/development</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://yayandeka.com/projects/writing</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
         <loc>https://yayandeka.com/p/privacy-policy</loc>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
